@@ -748,3 +748,66 @@ body {
   max-width: 900px;          /* ความกว้างแบบระบบจริง */
   padding: 30px;
 }
+.approve-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 10;
+}
+
+.btn-back {
+  background: #e5e7eb;
+  color: #111827;          /* <-- สำคัญ */
+  border: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.btn-back:hover {
+  background: #d1d5db;
+}
+/* ===== Approve Topbar ===== */
+.approve-topbar {
+  height: 56px;
+  background: #2c3e50;
+  color: #fff;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 24px;
+  font-size: 16px;
+}
+
+.topbar-left {
+  font-weight: 600;
+}
+
+.topbar-back {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.topbar-back:hover {
+  text-decoration: underline;
+}
+
+/* ===== Page layout ===== */
+.approve-page {
+  min-height: 100vh;
+  background: #f4f6f8;
+}
+
+.approve-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px;
+}

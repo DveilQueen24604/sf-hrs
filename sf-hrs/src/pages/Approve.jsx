@@ -3,13 +3,20 @@ function Approve({ role, onBack }) {
 
   return (
     <div className="approve-page">
-      <div className="approve-container">
 
-        {/* Header */}
-        <div className="approve-header">
-          <h2>Approve</h2>
-          <button className="btn-back" onClick={onBack}>← กลับ</button>
+      {/* ===== Topbar ===== */}
+      <div className="approve-topbar">
+        <div className="topbar-left">
+          SF Plus Co.,Ltd.
         </div>
+
+        <button className="topbar-back" onClick={onBack}>
+          ← กลับ
+        </button>
+      </div>
+
+      {/* ===== Content ===== */}
+      <div className="approve-container">
 
         {/* Search */}
         <div className="approve-search">
@@ -19,7 +26,7 @@ function Approve({ role, onBack }) {
           <button className="btn-search">Search</button>
         </div>
 
-        {/* ===== พนักงาน ===== */}
+        {/* ===== พนักงาน (ดูสถานะอย่างเดียว) ===== */}
         {role === 'employee' && (
           <div className="approve-card">
             <div className="card-header">
@@ -35,7 +42,7 @@ function Approve({ role, onBack }) {
           </div>
         )}
 
-        {/* ===== หัวหน้างาน ===== */}
+        {/* ===== หัวหน้างาน (อนุมัติลูกทีม) ===== */}
         {role === 'manager' && (
           <div className="approve-card">
             <div className="card-header">
