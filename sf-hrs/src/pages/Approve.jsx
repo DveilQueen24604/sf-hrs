@@ -3,22 +3,19 @@ function Approve({ role, onBack }) {
 
   return (
     <div className="approve-page">
-
       {/* ===== Topbar ===== */}
-      <div className="approve-topbar">
-        <div className="topbar-left">
-          SF Plus Co.,Ltd.
-        </div>
-
-        <button className="topbar-back" onClick={onBack}>
+      {/* Topbar */}
+      <div className="topbar">
+        <div className="logo">SF Plus Co.,Ltd.</div>
+        <button className="btn-back" onClick={onBack}>
           ← กลับ
         </button>
       </div>
 
-      {/* ===== Content ===== */}
       <div className="approve-container">
+        <h2>Approve</h2>
 
-        {/* Search */}
+        {/* ===== Search ===== */}
         <div className="approve-search">
           <input placeholder="ค้นหาเลขที่เอกสาร" />
           <input type="date" />
@@ -42,7 +39,7 @@ function Approve({ role, onBack }) {
           </div>
         )}
 
-        {/* ===== หัวหน้างาน (อนุมัติลูกทีม) ===== */}
+        {/* ===== หัวหน้างาน (อนุมัติได้) ===== */}
         {role === 'manager' && (
           <div className="approve-card">
             <div className="card-header">
@@ -51,12 +48,10 @@ function Approve({ role, onBack }) {
             </div>
 
             <div className="card-body">
-              <div className="info-grid">
-                <p><b>ชื่อพนักงาน:</b> สมพร ใจดี</p>
-                <p><b>ตำแหน่ง:</b> Accounting Officer</p>
-                <p><b>ประเภทการลา:</b> ลาพักร้อน</p>
-                <p><b>วันที่ลา:</b> 30/01/2026 (1 วัน)</p>
-              </div>
+              <p><b>ชื่อพนักงาน:</b> สมพร ใจดี</p>
+              <p><b>ตำแหน่ง:</b> Accounting Officer</p>
+              <p><b>ประเภทการลา:</b> ลาพักร้อน</p>
+              <p><b>วันที่ลา:</b> 30/01/2026 (1 วัน)</p>
 
               <textarea
                 className="comment-box"
@@ -70,7 +65,6 @@ function Approve({ role, onBack }) {
             </div>
           </div>
         )}
-
       </div>
     </div>
   )
