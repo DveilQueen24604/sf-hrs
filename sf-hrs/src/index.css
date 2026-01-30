@@ -735,6 +735,18 @@ body {
   border-radius: 8px;
 }
 /* หน้า Approve ทั้งหมด */
+/* ===== Approve page title ===== */
+.approve-title {
+  text-align: left;
+  margin-bottom: 4px;
+}
+
+.approve-subtitle {
+  text-align: left;
+  color: #666;
+  margin-bottom: 24px;
+}
+
 .approve-page {
   min-height: 100vh;
   background: #f4f6f8;
@@ -771,43 +783,133 @@ body {
   background: #d1d5db;
 }
 /* ===== Approve Topbar ===== */
-.approve-topbar {
+.page {
+  min-height: 100vh;
+  background: #f4f6f8;
+}
+
+.page-topbar {
   height: 56px;
   background: #2c3e50;
   color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+}
+
+.page-content {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 32px 24px;
+}
+
+.page-title {
+  text-align: center;
+  margin-bottom: 4px;
+}
+
+.page-subtitle {
+  text-align: center;
+  color: #666;
+  margin-bottom: 24px;
+}
+/* ===== Approve Page ===== */
+.approve-page {
+  min-height: 100vh;
+  background: #f2f4f7;
+}
+
+.approve-wrapper {
+  padding: 40px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.approve-title {
+  margin-bottom: 5px;
+  color: #2f3e4e;
+}
+
+.approve-subtitle {
+  margin-bottom: 25px;
+  color: #777;
+  font-size: 14px;
+}
+/* ===== TOPBAR (ใช้ร่วมกันทุกหน้า) ===== */
+.main-topbar {
+  background: #2f3e4e;
+}
+
+.topbar-inner {
+  height: 60px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
 
   display: flex;
   align-items: center;
   justify-content: space-between;
-
-  padding: 0 24px;
-  font-size: 16px;
 }
 
 .topbar-left {
+  color: #fff;
   font-weight: 600;
 }
 
 .topbar-back {
-  background: none;
+  background: #fff;
   border: none;
-  color: #fff;
-  font-size: 14px;
+  padding: 6px 14px;
+  border-radius: 6px;
   cursor: pointer;
+  font-size: 14px;
 }
 
-.topbar-back:hover {
-  text-decoration: underline;
-}
-
-/* ===== Page layout ===== */
+/* ===== PAGE ===== */
 .approve-page {
   min-height: 100vh;
   background: #f4f6f8;
 }
 
-.approve-container {
-  max-width: 1100px;
+.approve-wrapper {
+  max-width: 900px;
   margin: 0 auto;
-  padding: 24px;
+  padding: 40px 24px;
+  text-align: center;
+}
+
+.page-title {
+  margin-bottom: 5px;
+}
+
+.page-subtitle {
+  color: #777;
+  font-size: 14px;
+  margin-bottom: 30px;
+}
+
+.user-bar {
+  display: flex;
+  align-items: center;
+  color: #fff;
+  font-size: 14px;
+}
+
+.divider {
+  margin: 0 6px;
+  opacity: 0.7;
+}
+
+.logout-link {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 0;
+}
+
+.logout-link:hover {
+  text-decoration: underline;
 }

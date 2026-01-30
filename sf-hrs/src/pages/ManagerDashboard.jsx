@@ -1,11 +1,18 @@
-function ManagerDashboard({ goRequest, goApprove, goESS }) {
+function ManagerDashboard({ goRequest, goApprove, goESS, onLogout }) {
   return (
     <div className="dashboard">
       {/* ===== Topbar ===== */}
       <div className="topbar">
         <div className="logo">SF Plus Co.,Ltd.</div>
-        <div className="user-info">
-          ROLE : Manager | นายสมศักดิ์ หัวหน้าแผนก
+        <div className="user-bar">
+          <span>
+            ROLE : Manager | นายสมศักดิ์ หัวหน้าแผนก
+            <span className="divider"> | </span>
+          </span>
+
+          <button className="logout-link" onClick={onLogout}>
+            ออกจากระบบ
+          </button>
         </div>
       </div>
 

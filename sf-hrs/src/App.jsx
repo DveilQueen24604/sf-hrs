@@ -1,8 +1,8 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 // pages
 import Login from './pages/Login'
-import Dashboard from './pages/Dashboard'           // พนักงาน
+import Dashboard from './pages/Dashboard'
 import ManagerDashboard from './pages/ManagerDashboard'
 import Request from './pages/Request'
 import Approve from './pages/Approve'
@@ -11,35 +11,61 @@ import EmployeeSelfService from './pages/EmployeeSelfService'
 function App() {
   // ===== auth =====
   const [isLogin, setIsLogin] = useState(false)
-  const [role, setRole] = useState(null) // 'employee' | 'manager'
+  const [role, setRole] = useState(null)
 
   // ===== navigation =====
-  const [page, setPage] = useState('dashboard')
+  const [page, setPage] = useState(null)
 
   /* =========================
-     1) ยังไม่ล็อกอิน
+     โหลดสถานะจาก localStorage
+  ========================= */
+  useEffect(() => {
+    const savedLogin = localStorage.getItem('isLogin')
+    const savedRole = localStorage.getItem('role')
+
+    if (savedLogin === 'true' && savedRole) {
+      setIsLogin(true)
+      setRole(savedRole)
+      setPage('dashboard')
+    }
+  }, [])
+
+  /* =========================
+     Logout
+  ========================= */
+  const handleLogout = () => {
+    localStorage.clear()
+    setIsLogin(false)
+    setRole(null)
+    setPage(null)
+  }
+
+  /* =========================
+     ยังไม่ล็อกอิน
   ========================= */
   if (!isLogin) {
     return (
       <Login
         onLogin={(userRole) => {
-          setRole(userRole)
           setIsLogin(true)
+          setRole(userRole)
           setPage('dashboard')
+
+          localStorage.setItem('isLogin', 'true')
+          localStorage.setItem('role', userRole)
         }}
       />
     )
   }
 
   /* =========================
-     2) หน้าที่ใช้ร่วมกัน
+     หน้าที่ใช้ร่วมกัน
   ========================= */
   if (page === 'request') {
     return <Request onBack={() => setPage('dashboard')} />
   }
 
   if (page === 'approve') {
-    // ⭐ จุดสำคัญ: Approve แยก UI ด้วย role ภายในไฟล์
     return <Approve role={role} onBack={() => setPage('dashboard')} />
   }
 
@@ -48,41 +74,31 @@ function App() {
   }
 
   /* =========================
-     3) Dashboard แยกตาม role
+     Dashboard แยกตาม role
   ========================= */
-
-  // ----- พนักงาน -----
-  if (role === 'employee') {
+  if (page === 'dashboard' && role === 'employee') {
     return (
       <Dashboard
         goRequest={() => setPage('request')}
-        goApprove={() => setPage('approve')} // ดูสถานะของตนเอง
+        goApprove={() => setPage('approve')}
         goESS={() => setPage('ess')}
+        onLogout={handleLogout}
       />
     )
   }
 
-  // ----- หัวหน้างาน -----
-  if (role === 'manager') {
+  if (page === 'dashboard' && role === 'manager') {
     return (
       <ManagerDashboard
         goRequest={() => setPage('request')}
-        goApprove={() => setPage('approve')} // อนุมัติลูกทีม
+        goApprove={() => setPage('approve')}
         goESS={() => setPage('ess')}
+        onLogout={handleLogout}
       />
     )
   }
 
-  /* =========================
-     fallback (กันหน้าขาว)
-  ========================= */
-  return (
-    <div style={{ padding: 40 }}>
-      <h3>Loading...</h3>
-      <p>role: {role}</p>
-      <p>page: {page}</p>
-    </div>
-  )
+  return null
 }
 
 export default App

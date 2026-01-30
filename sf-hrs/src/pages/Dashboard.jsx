@@ -1,10 +1,20 @@
-function Dashboard({ goRequest, goApprove,goESS}) {
+function Dashboard({ goRequest, goApprove, goESS, onLogout }) {
   return (
     <div className="dashboard">
       {/* Topbar */}
       <div className="topbar">
         <div className="logo">SF Plus Co.,Ltd.</div>
-        <div className="user-info">USER : สมชาย ใจดี | ออก</div>
+        <div className="user-bar">
+          <span>
+            USER: สมชาย ใจดี
+            <span className="divider"> | </span>
+          </span>
+
+          <button className="logout-link" onClick={onLogout}>
+            ออกจากระบบ
+          </button>
+        </div>
+
       </div>
 
       <div className="dashboard-body">
@@ -45,6 +55,7 @@ function Dashboard({ goRequest, goApprove,goESS}) {
         </div>
       </div>
     </div>
+    
   )
 }
 
