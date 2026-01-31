@@ -1,3 +1,12 @@
+import { useState } from 'react'
+import { supabase } from '../supabase'
+const [leaveType, setLeaveType] = useState('')
+const [startDate, setStartDate] = useState('')
+const [endDate, setEndDate] = useState('')
+const [days, setDays] = useState('')
+const [reason, setReason] = useState('')
+const [error, setError] = useState('')
+
 function Request({ onBack }) {
   return (
     <div className="request-page">
