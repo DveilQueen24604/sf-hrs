@@ -12,6 +12,7 @@ function App() {
   // ===== auth =====
   const [isLogin, setIsLogin] = useState(false)
   const [role, setRole] = useState(null)
+  const [fullName, setFullName] = useState('')
 
   // ===== navigation =====
   const [page, setPage] = useState(null)
@@ -22,10 +23,12 @@ function App() {
   useEffect(() => {
     const savedLogin = localStorage.getItem('isLogin')
     const savedRole = localStorage.getItem('role')
+    const savedFullName = localStorage.getItem('fullName')
 
     if (savedLogin === 'true' && savedRole) {
       setIsLogin(true)
       setRole(savedRole)
+      if (savedFullName) setFullName(savedFullName)
       setPage('dashboard')
     }
   }, [])
@@ -37,6 +40,7 @@ function App() {
     localStorage.clear()
     setIsLogin(false)
     setRole(null)
+    setFullName('')
     setPage(null)
   }
 
@@ -46,13 +50,15 @@ function App() {
   if (!isLogin) {
     return (
       <Login
-        onLogin={(userRole) => {
+        onLogin={({ role, fullName }) => {
           setIsLogin(true)
-          setRole(userRole)
+          setRole(role)
+          setFullName(fullName)
           setPage('dashboard')
 
           localStorage.setItem('isLogin', 'true')
-          localStorage.setItem('role', userRole)
+          localStorage.setItem('role', role)
+          localStorage.setItem('fullName', fullName)
         }}
       />
     )

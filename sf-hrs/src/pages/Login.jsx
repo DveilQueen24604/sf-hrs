@@ -1,56 +1,74 @@
 import { useState } from 'react'
+import { supabase } from '../supabase'
 
 function Login({ onLogin }) {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
 
-  const handleLogin = () => {
-    // mock user
-    if (username === 'EMP001' && password === '1234') {
-      onLogin('employee')
-      return
-    }
+  const handleLogin = async () => {
+    setError('')
 
-    if (username === 'MER001' && password === '1234') {
-      onLogin('manager')
-      return
-    }
+    try {
+      console.log('Login attempt', { username })
+      const start = Date.now()
+      const { data, error: sbError } = await supabase
+        .from('users')
+        .select('*')
+        .eq('username', username)
+        .eq('password', password)
+        .single()
+      const duration = Date.now() - start
 
-    setError('Username หรือ Password ไม่ถูกต้อง')
-  }
+      console.log('Supabase response', { data, sbError, duration })
+
+      if (sbError) {
+        // show detailed Supabase error for debugging
+        const msg = sbError.message || JSON.stringify(sbError)
+        setError(`Supabase error: ${msg}`)
+        return
+      }
+
+      if (!data) {
+        setError('ไม่พบข้อมูลผู้ใช้ (data empty)')
+        return
+      }
+
+      // success - send object to match App onLogin signature
+      <Login
+  onLogin={({ role, fullName }) => {
+    setIsLogin(true)
+    setRole(role)
+    setFullName(fullName)
+    setPage('dashboard')
+
+    localStorage.setItem('isLogin', 'true')
+    localStorage.setItem('role', role)
+    localStorage.setItem('fullName', fullName)
+  }}
+/>
+
 
   return (
     <div className="login-page">
-      <div className="login-card">
-        <h2 className="login-title">SF+ HRS V.1</h2>
+      <h2>SF + HRS</h2>
 
-        <div className="login-group">
-          <label>Username</label>
-          <input
-            type="text"
-            placeholder="เช่น EMP001 / MER001"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-        </div>
+      <input
+        placeholder="Username"
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
+      />
 
-        <div className="login-group">
-          <label>Password</label>
-          <input
-            type="password"
-            placeholder="********"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
+      <input
+        type="password"
+        placeholder="Password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+      />
 
-        {error && <p className="login-error">{error}</p>}
+      {error && <p style={{ color: 'red' }}>{error}</p>}
 
-        <button className="login-btn" onClick={handleLogin}>
-          Login
-        </button>
-      </div>
+      <button onClick={handleLogin}>Login</button>
     </div>
   )
 }

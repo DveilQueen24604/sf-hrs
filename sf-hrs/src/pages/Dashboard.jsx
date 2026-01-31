@@ -1,4 +1,4 @@
-function Dashboard({ goRequest, goApprove, goESS, onLogout }) {
+function Dashboard({ goRequest, goApprove, goESS, onLogout, fullName }) {
   return (
     <div className="dashboard">
       {/* Topbar */}
@@ -6,7 +6,7 @@ function Dashboard({ goRequest, goApprove, goESS, onLogout }) {
         <div className="logo">SF Plus Co.,Ltd.</div>
         <div className="user-bar">
           <span>
-            USER: สมชาย ใจดี
+            USER: {fullName || 'สมชาย ใจดี'}
             <span className="divider"> | </span>
           </span>
 

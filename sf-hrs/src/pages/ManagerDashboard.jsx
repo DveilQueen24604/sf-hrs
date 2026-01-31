@@ -1,4 +1,4 @@
-function ManagerDashboard({ goRequest, goApprove, goESS, onLogout }) {
+function ManagerDashboard({ goRequest, goApprove, goESS, onLogout, fullName }) {
   return (
     <div className="dashboard">
       {/* ===== Topbar ===== */}
@@ -6,7 +6,7 @@ function ManagerDashboard({ goRequest, goApprove, goESS, onLogout }) {
         <div className="logo">SF Plus Co.,Ltd.</div>
         <div className="user-bar">
           <span>
-            ROLE : Manager | นายสมศักดิ์ หัวหน้าแผนก
+            ROLE : Manager | {fullName || 'นายสมศักดิ์ หัวหน้าแผนก'}
             <span className="divider"> | </span>
           </span>
 
